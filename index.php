@@ -48,7 +48,14 @@ $grupo = selectAllPessoa();
                                 <input type="submit" value="Editar" name="editar" />
                             </form>
                         </td>
-                        <td>Excluir</td>
+                        <td>
+                            <form name="excluir" action="conexao.php" method="POST">
+                                <input type="hidden" name="id" value="<?= $pessoa["id"] ?>" />
+                                <input type="hidden" name="acao" value="excluir" />
+                                <input type="submit" value="Excluir" name="excluir" />
+                            </form>
+
+                        </td>
                     </tr>
 
                 <?php }

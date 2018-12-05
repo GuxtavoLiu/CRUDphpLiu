@@ -14,6 +14,9 @@ if (isset($_POST["acao"])) {
     }if ($_POST["acao"] == "alterar") {
         alterarPessoa();
     }
+    if ($_POST["acao"] == "excluir") {
+        excluirPessoa();
+    }
 }
 
 function abrirBanco() {
@@ -41,6 +44,16 @@ function alterarPessoa() {
             . ", endereco = '{$_POST["endereco"]}'"
             . ", telefone = '{$_POST["telefone"]}'"
             . " WHERE id = '{$_POST["id"]}'";
+
+    $banco->query($sql);
+    $banco->close();
+    voltarIndex();
+}
+
+function excluirPessoa() {
+    $banco = abrirBanco();
+
+    $sql = "DELETE FROM pessoa WHERE id ='{$_POST["id"]}' ";
 
     $banco->query($sql);
     $banco->close();
