@@ -6,9 +6,11 @@
  * and open the template in the editor.
  */
 
+session_start();
+
 //VERIFICA SE O POST acao EXISTE
 if (isset($_POST["acao"])) {
-//verifica qual a acao do post acao
+//verifica qual a acao do post acao 
     if ($_POST["acao"] == "inserir") {
         inserirPessoa();
     }if ($_POST["acao"] == "alterar") {
@@ -25,10 +27,17 @@ function abrirBanco() {
 }
 
 function inserirPessoa() {
+    $nome = $_POST["nome"];
+    $nascimento = $_POST["nascimento"];
+    $endereco = $_POST["endereco"];
+    $telefone = $_POST["telefone"];
+
+
+
     $banco = abrirBanco();
 
     $sql = "INSERT INTO pessoa(nome, nascimento, endereco, telefone)"
-            . " VALUES ('{$_POST["nome"]}','{$_POST["nascimento"]}','{$_POST["endereco"]}','{$_POST["telefone"]}')";
+            . " VALUES ('$nome','$nascimento','$endereco','$telefone')";
 
     $banco->query($sql);
     $banco->close();
@@ -68,7 +77,13 @@ function selectAllPessoa() {
     while ($row = mysqli_fetch_array($resultado)) {
         $grupo[] = $row;
     }
-    return $grupo;
+    //se a variavel grupo não for vazia, retornar ela, se for vazia retornar variavel grupo= null
+
+    if (!empty($grupo)) {
+        return $grupo;
+    } else {
+        return $grupo = null;
+    }
 }
 
 function selectId($id) {
